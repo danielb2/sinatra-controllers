@@ -3,13 +3,15 @@ module Sinatra
     attr_accessor :params, :request, :template_cache
     include Sinatra::Templates
     private
-    def setup_controller(params,request)
+    def initialize(params,request)
       @params  = params
       @request = request
       @template_cache = Tilt::Cache.new rescue 'sinatra < 1.0'
       @templates = {}
     end
     class << self
+      def views
+      end
       def templates
         {}
       end
@@ -24,11 +26,7 @@ module Sinatra
       end
       def get(path, action, opts={})
         aklass = klass # need this so it will stay in scope for closure
-        block = proc do
-          inst = aklass.new
-          inst.send :setup_controller, params, request
-          inst.send action
-        end
+        block = proc { aklass.new(params, request).send action }
         Sinatra::Application.get path, &block
       end
     end
