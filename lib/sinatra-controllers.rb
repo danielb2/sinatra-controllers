@@ -1,7 +1,8 @@
 module Sinatra
   module Controller
     attr_accessor :params, :request
-    def initialize(params,request)
+    private
+    def setup_controller(params,request)
       @params  = params
       @request = request
     end
@@ -15,8 +16,12 @@ module Sinatra
       end
       def get(path, action, opts={})
         aklass = klass # need this so it will stay in scope for closure
-        test = proc { aklass.new(params,request).send action }
-        Sinatra::Application.get path, &test
+        block = proc do
+          inst = aklass.new
+          inst.send :setup_controller, params, request
+          inst.send action
+        end
+        Sinatra::Application.get path, &block
       end
     end
 
