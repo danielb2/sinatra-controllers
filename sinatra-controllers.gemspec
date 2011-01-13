@@ -5,11 +5,11 @@ Gem::Specification.new do |s|
   s.name        = "sinatra-controllers"
   s.version     = Sinatra::Controllers::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = []
+  s.authors     = ['Daniel Bretoi']
   s.email       = []
   s.homepage    = "http://rubygems.org/gems/sinatra-controllers"
-  s.summary     = "TODO: Write a gem summary"
-  s.description = "TODO: Write a gem description"
+  s.summary     = "Adds controllers to Sinatra"
+  s.description = "Adds controllers to Sinatra"
 
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "sinatra-controllers"
