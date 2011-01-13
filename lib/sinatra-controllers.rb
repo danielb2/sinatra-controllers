@@ -1,10 +1,18 @@
 module Sinatra
-  module Controller
-    attr_accessor :params, :request
+  class Controller
+    attr_accessor :params, :request, :template_cache, :templates
+    include Sinatra::Templates
     private
     def setup_controller(params,request)
       @params  = params
       @request = request
+      @template_cache = Tilt::Cache.new
+      @templates = {}
+    end
+    class << self
+      def templates
+        {}
+      end
     end
   end
   module Controllers
