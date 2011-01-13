@@ -6,9 +6,9 @@ module Sinatra
         @klass = klass
         @opts  = opts
       end
-      def get(path,opts)
+      def get(path, action, opts={})
         aklass = klass # need this so it will stay in scope for closure
-        test = proc { aklass.new.send opts[:action] }
+        test = proc { aklass.new.send action }
         Sinatra::Application.get path, &test
       end
     end
