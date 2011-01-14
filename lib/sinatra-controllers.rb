@@ -2,7 +2,6 @@ module Sinatra
   class Controller
     attr_accessor :params, :request, :template_cache
     include Sinatra::Templates
-    private
     def initialize(params,request)
       @params  = params
       @request = request
