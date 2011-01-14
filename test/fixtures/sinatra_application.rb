@@ -14,6 +14,10 @@ class Blah < Sinatra::Controller
   def test
     params.inspect
   end
+
+  def requested
+    request.inspect
+  end
 end
 class Help < Sinatra::Controller
   def help
@@ -24,6 +28,7 @@ Sinatra::Controllers.register(Help) do |route|
   route.get '/help', :help
 end
 Sinatra::Controllers.register(Blah) do |route|
+  route.get '/request', :requested
   route.get '/', :help
   route.get '/test/:id', :test
 end
