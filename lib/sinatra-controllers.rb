@@ -29,7 +29,7 @@ module Sinatra
         Sinatra::Application.send verb, path, &block
       end
       def method_missing(method,*a)
-        case method
+        case method.to_s
         when /(get|post|delete)/
           route(method, *a)
         end
