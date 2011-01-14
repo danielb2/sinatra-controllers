@@ -23,10 +23,17 @@ module Sinatra
         @klass = klass
         @opts  = opts
       end
-      def get(path, action, opts={})
+      def route(verb, path, action, opts={})
         aklass = klass # need this so it will stay in scope for closure
         block = proc { aklass.new(params, request).send action }
-        Sinatra::Application.get path, &block
+        Sinatra::Application.send verb, path, &block
+      end
+      def method_missing(method,*a)
+        case method
+        when /(get|post|delete)/
+          route(method, *a)
+        end
+        self
       end
     end
 

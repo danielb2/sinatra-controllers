@@ -1,5 +1,6 @@
 require 'rack/test'
 require 'test/unit'
+require 'minitest/autorun'
 require './test/fixtures/sinatra_application'
 
 class ClassicMappingTest < MiniTest::Unit::TestCase
@@ -26,6 +27,12 @@ class ClassicMappingTest < MiniTest::Unit::TestCase
   def test_help_route
     get '/help'
     assert_equal 200, last_response.status
+  end
+
+  def test_regular
+    get '/regular'
+    assert_equal 200, last_response.status
+    assert_equal true, (last_response.body =~ /flames/) != nil
   end
 
 end

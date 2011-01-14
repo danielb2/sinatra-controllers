@@ -27,3 +27,8 @@ Sinatra::Controllers.register(Blah) do |route|
   route.get '/', :help
   route.get '/test/:id', :test
 end
+
+# regular paths should work too
+get '/regular' do
+  'flames'
+end
