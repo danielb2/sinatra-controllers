@@ -62,4 +62,9 @@ class ClassicMappingTest < MiniTest::Unit::TestCase
     assert_equal true, (last_response.body =~ /SCRIPT_NAME/) != nil
   end
 
+  def test_post
+    post '/racket'
+    assert_equal 200, last_response.status
+    assert_equal true, (last_response.body =~ /posted/) != nil
+  end
 end

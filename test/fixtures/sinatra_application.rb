@@ -18,6 +18,10 @@ class Blah < Sinatra::Controller
   def requested
     request.inspect
   end
+
+  def racket
+    'posted'
+  end
 end
 class Help < Sinatra::Controller
   def help
@@ -31,6 +35,7 @@ Sinatra::Controllers.register(Blah) do |route|
   route.get '/request', :requested
   route.get '/', :help
   route.get '/test/:id', :test
+  route.post '/racket', :racket
 end
 
 # regular paths should work too
