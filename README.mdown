@@ -1,0 +1,16 @@
+# Sinatra-controller
+
+Allows for clean organization across multiple sinatra routes files. Example:
+
+
+help.rb
+> class Help < Sinatra::Controller
+>   def help
+>     'another help'
+>   end
+> end
+
+sinatra\_routes.rb
+> Sinatra::Controllers.register(Help) do |route|
+>   route.get '/help', :help
+> end
