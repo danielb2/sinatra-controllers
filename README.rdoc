@@ -31,3 +31,6 @@ sinatra\_controller.rb
   Sinatra::Controllers.register Welcome do
     get '/', :index
   end
+
+You can divide your routes cleanly between as many classes as you please. At any time, you can also simply
+revert back to the plain vanilla sinatra syntax on use get at the top level.
