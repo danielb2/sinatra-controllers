@@ -1,17 +1,33 @@
 = Sinatra-controller
 
 Sinatra routing done differently.
-Allows for clean organization across multiple sinatra routes files. Example:
+Allows for clean organization across multiple sinatra routes files.
 
 
-help.rb
-    class Help < Sinatra::Controller
-      def help
-        'another help'
+== Example
+
+views/index.haml
+    <!DOCTYPE HTML>
+    %html
+      %head
+        %meta(http-equiv="content-type" content="text/html; charset=utf-8")
+
+        %title test page
+    %body
+      fly away with sinatra controllers
+
+sinatra\_controller.rb
+    #!/usr/bin/env ruby
+
+    require 'sinatra'
+    require 'sinatra-controllers'
+
+    class Welcome < Sinatra::Controller
+      def index
+        haml :index
       end
     end
 
-sinatra_routes.rb
-    Sinatra::Controllers.register(Help) do |route|
-      route.get '/help', :help
+    Sinatra::Controllers.register Welcome do |route|
+      route.get '/', :index
     end
