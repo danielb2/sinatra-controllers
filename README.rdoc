@@ -7,27 +7,27 @@ Allows for clean organization across multiple sinatra routes files.
 == Example
 
 views/index.haml
-    <!DOCTYPE HTML>
-    %html
-      %head
-        %meta(http-equiv="content-type" content="text/html; charset=utf-8")
+  <!DOCTYPE HTML>
+  %html
+    %head
+      %meta(http-equiv="content-type" content="text/html; charset=utf-8")
 
-        %title test page
-    %body
-      fly away with sinatra controllers
+      %title test page
+  %body
+    fly away with sinatra controllers
 
 sinatra\_controller.rb
-    #!/usr/bin/env ruby
+  #!/usr/bin/env ruby
 
-    require 'sinatra'
-    require 'sinatra-controllers'
+  require 'sinatra'
+  require 'sinatra-controllers'
 
-    class Welcome < Sinatra::Controller
-      def index
-        haml :index
-      end
+  class Welcome < Sinatra::Controller
+    def index
+      haml :index
     end
+  end
 
-    Sinatra::Controllers.register Welcome do |route|
-      route.get '/', :index
-    end
+  Sinatra::Controllers.register Welcome do |route|
+    get '/', :index
+  end

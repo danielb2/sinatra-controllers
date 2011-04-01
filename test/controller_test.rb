@@ -56,6 +56,18 @@ class ClassicMappingTest < MiniTest::Unit::TestCase
     assert_equal true, (last_response.body =~ /flames/) != nil
   end
 
+  def test_all
+    delete '/all'
+    assert_equal 200, last_response.status
+    assert_equal true, (last_response.body =~ /wiped/) != nil
+  end
+
+  def test_flame
+    put '/flame'
+    assert_equal 200, last_response.status
+    assert_equal true, (last_response.body =~ /heat/) != nil
+  end
+
   def test_request
     get '/request'
     assert_equal 200, last_response.status

@@ -28,18 +28,21 @@ module Sinatra
         block = proc { aklass.new(params, request).send action }
         Sinatra::Application.send verb, path, &block
       end
+      # why are these even defined?
+      undef_method :get, :post, :put, :delete
       def method_missing(method,*a)
         case method.to_s
-        when /(get|post|delete)/
+        when /(get|post|delete|put)/
           route(method, *a)
+        else
+          super
         end
-        self
       end
     end
 
     class << self
-      def register(klass, opts={})
-        yield Mapping.new(klass,opts)
+      def register(klass, opts={}, &block)
+        Mapping.new(klass,opts).instance_eval(&block)
       end
     end
   end
