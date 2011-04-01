@@ -1,5 +1,6 @@
 # Sinatra-controller
 
+Sinatra routing done differently.
 Allows for clean organization across multiple sinatra routes files. Example:
 
 
