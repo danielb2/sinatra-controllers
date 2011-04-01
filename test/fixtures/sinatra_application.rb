@@ -30,15 +30,22 @@ class Blah < Sinatra::Controller
   def everything
     'wiped'
   end
+  def fringe
+    @fringe = "Anna Torv"
+    haml :fringe
+  end
 end
+
 class Help < Sinatra::Controller
   def help
     'another help'
   end
 end
+
 Sinatra::Controllers.register(Help) do
   get '/help', :help
 end
+
 Sinatra::Controllers.register(Blah) do
   get '/request', :requested
   get '/', :help
@@ -46,6 +53,7 @@ Sinatra::Controllers.register(Blah) do
   post '/racket', :racket
   put '/flame', :flames
   delete '/all', :everything
+  get '/fringe', :fringe
 end
 
 # regular paths should work too

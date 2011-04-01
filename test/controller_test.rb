@@ -39,6 +39,13 @@ class ClassicMappingTest < MiniTest::Unit::TestCase
     assert_equal true, (last_response.body =~ /message/) != nil
   end
 
+  def test_fringe
+    get '/fringe'
+    assert_equal 200, last_response.status
+    assert_equal true, (last_response.body =~ /bishop/) != nil
+    assert_equal true, (last_response.body =~ /Anna Torv/) != nil
+  end
+
   def test_param_pass
     get '/test/232'
     assert_equal 200, last_response.status
