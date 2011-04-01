@@ -28,6 +28,6 @@ sinatra\_controller.rb
     end
   end
 
-  Sinatra::Controllers.register Welcome do |route|
+  Sinatra::Controllers.register Welcome do
     get '/', :index
   end
