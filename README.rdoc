@@ -53,6 +53,7 @@ on use get at the top level.
   end
 
 This is a trick for common requests that don't require arguments. It creates a
-route corresponding to `get '/welcome/about'`. The block to register is
-optional here.
+route corresponding to `get '/welcome/about'` in the flavor of Test::Unit where
+it uses the prefix before the underscore for the route type. The block to
+register is optional here.
 
