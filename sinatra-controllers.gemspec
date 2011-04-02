@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Daniel Bretoi']
   s.email       = []
-  s.homepage    = "http://rubygems.org/gems/sinatra-controllers"
+  s.homepage    = "https://github.com/danielb2/sinatra-controllers"
   s.summary     = "Adds controllers to Sinatra"
   s.description = "Adds controllers to Sinatra"
 
