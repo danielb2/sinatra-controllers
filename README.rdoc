@@ -7,6 +7,7 @@ NOTE: this has only been tested with ruby 1.9.2
 
 
 == Examples
+Also see the fixtures folders for what's used in the tests.
 
 views/index.haml
   <!DOCTYPE HTML>
@@ -17,6 +18,10 @@ views/index.haml
       %title test page
   %body
     fly away with sinatra controllers
+
+You can divide your routes cleanly between as many classes as you please. At
+any time, you can also simply revert back to the plain vanilla sinatra syntax
+on use get at the top level.
 
 sinatra\_controller.rb
   #!/usr/bin/env ruby
@@ -41,10 +46,10 @@ sinatra\_controller.rb
     get '/', :index
   end
 
-
-You can divide your routes cleanly between as many classes as you please. At
-any time, you can also simply revert back to the plain vanilla sinatra syntax
-on use get at the top level.
+This is a trick for common requests that don't require arguments. It creates a
+route corresponding to `get '/welcome/about'` in the flavor of Test::Unit where
+it uses the prefix before the underscore for the route type. The block to
+register is optional here.
 
   class Welcome < Sinatra::Controller
     def get_about
@@ -52,8 +57,4 @@ on use get at the top level.
     end
   end
 
-This is a trick for common requests that don't require arguments. It creates a
-route corresponding to `get '/welcome/about'` in the flavor of Test::Unit where
-it uses the prefix before the underscore for the route type. The block to
-register is optional here.
 
