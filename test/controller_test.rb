@@ -56,6 +56,11 @@ class ClassicMappingTest < MiniTest::Unit::TestCase
     get '/help'
     assert_equal 200, last_response.status
   end
+  def test_help_index
+    get '/help/index'
+    assert_equal 200, last_response.status
+    assert_equal true, (last_response.body =~ /help found/) != nil
+  end
 
   def test_regular
     get '/regular'
@@ -85,5 +90,40 @@ class ClassicMappingTest < MiniTest::Unit::TestCase
     post '/racket'
     assert_equal 200, last_response.status
     assert_equal true, (last_response.body =~ /posted/) != nil
+  end
+  def test_arguments
+    get '/take/123'
+    assert_equal 200, last_response.status
+    assert_equal true, (last_response.body =~ /123/) != nil
+  end
+end
+
+require 'minitest/spec'
+describe  "without defined route block" do
+  include Rack::Test::Methods
+  def app
+    @app = Sinatra::Application
+    @app.set :environment, :test
+    @app
+  end
+  it "should respond to get" do
+    get '/welcome/index'
+    last_response.status.must_equal 200
+    last_response.body.must_match /route test/
+  end
+  it "should respond to put" do
+    put '/welcome/update'
+    last_response.status.must_equal 200
+    last_response.body.must_match /walternet/
+  end
+  it "should respond to post" do
+    post '/welcome/peter'
+    last_response.status.must_equal 200
+    last_response.body.must_match /amber/
+  end
+  it "should respond to delete" do
+    delete '/welcome/universe'
+    last_response.status.must_equal 200
+    last_response.body.must_match /destroy/
   end
 end

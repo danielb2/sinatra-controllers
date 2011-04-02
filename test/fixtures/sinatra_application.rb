@@ -34,13 +34,36 @@ class Blah < Sinatra::Controller
     @fringe = "Anna Torv"
     haml :fringe
   end
+  def take
+    params[:arg]
+  end
 end
 
 class Help < Sinatra::Controller
   def help
     'another help'
   end
+  def get_index
+    'help found'
+  end
 end
+
+class Welcome < Sinatra::Controller
+  def get_index
+    'route test'
+  end
+  def put_update
+    'walternet'
+  end
+  def post_peter
+    'amber'
+  end
+  def delete_universe
+    'destroy'
+  end
+end
+
+Sinatra::Controllers.register(Welcome)
 
 Sinatra::Controllers.register(Help) do
   get '/help', :help
@@ -54,6 +77,7 @@ Sinatra::Controllers.register(Blah) do
   put '/flame', :flames
   delete '/all', :everything
   get '/fringe', :fringe
+  get '/take/:arg', :take
 end
 
 # regular paths should work too

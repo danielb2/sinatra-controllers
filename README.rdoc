@@ -1,10 +1,12 @@
 = Sinatra-controller
 
-Sinatra routing done differently.
-Allows for clean organization across multiple sinatra routes files.
+Sinatra routing done differently.  Allows for clean organization across
+multiple sinatra routes files.
+
+NOTE: this has only been tested with ruby 1.9.2
 
 
-== Example
+== Examples
 
 views/index.haml
   <!DOCTYPE HTML>
@@ -26,11 +28,31 @@ sinatra\_controller.rb
     def index
       haml :index
     end
+
+    # this create a route corresponding to `get '/welcome/about'`
+    # making it a shortcut for common routes. It doesn't handle arguments
+    # unlike the block syntax.
+    def get_about
+      'making controllers in sinatra easy'
+    end
   end
 
   Sinatra::Controllers.register Welcome do
     get '/', :index
   end
 
-You can divide your routes cleanly between as many classes as you please. At any time, you can also simply
-revert back to the plain vanilla sinatra syntax on use get at the top level.
+
+You can divide your routes cleanly between as many classes as you please. At
+any time, you can also simply revert back to the plain vanilla sinatra syntax
+on use get at the top level.
+
+  class Welcome < Sinatra::Controller
+    def get_about
+      'making controllers in sinatra easy'
+    end
+  end
+
+This is a trick for common requests that don't require arguments. It creates a
+route corresponding to `get '/welcome/about'`. The block to register is
+optional here.
+
