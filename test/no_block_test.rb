@@ -1,4 +1,4 @@
-
+require './test/helper'
 require 'minitest/spec'
 describe  "without defined route block" do
   include Rack::Test::Methods

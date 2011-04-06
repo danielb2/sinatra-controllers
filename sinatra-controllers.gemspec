@@ -18,6 +18,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler", ">= 1.0.0"
   s.add_development_dependency "minitest", "~> 2.0.0"
   s.add_development_dependency "watchr"
+  s.add_development_dependency "rack-test", "~> 0.5.7"
+  s.add_development_dependency "awesome_print"
+  s.add_development_dependency "haml"
+
 
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact

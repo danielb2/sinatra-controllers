@@ -1,10 +1,4 @@
-require 'rack/test'
-require 'test/unit'
-require 'minitest/autorun'
-require 'ap'
-require './test/fixtures/sinatra_application'
 require './test/helper'
-
 class ClassicMappingTest < MiniTest::Unit::TestCase
   include Rack::Test::Methods
 

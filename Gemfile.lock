@@ -7,8 +7,12 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
+    awesome_print (0.3.1)
+    haml (3.0.25)
     minitest (2.0.2)
     rack (1.2.2)
+    rack-test (0.5.7)
+      rack (>= 1.0)
     sinatra (1.2.1)
       rack (~> 1.1)
       tilt (>= 1.2.2, < 2.0)
@@ -19,8 +23,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   bundler (>= 1.0.0)
+  haml
   minitest (~> 2.0.0)
+  rack-test (~> 0.5.7)
   sinatra (>= 1.0.0)
   sinatra-controllers!
   watchr

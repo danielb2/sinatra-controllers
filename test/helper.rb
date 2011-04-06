@@ -1,3 +1,10 @@
+require 'bundler/setup'
+require 'rack/test'
+require 'test/unit'
+require 'minitest/autorun'
+require 'awesome_print'
+require './test/fixtures/sinatra_application'
+
 class Pride
   def print o
     case o
