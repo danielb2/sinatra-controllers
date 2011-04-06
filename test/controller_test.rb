@@ -3,26 +3,7 @@ require 'test/unit'
 require 'minitest/autorun'
 require 'ap'
 require './test/fixtures/sinatra_application'
-
-class Pride
-  def print o
-    case o
-    when /0 errors/i
-      Kernel.print o.green
-    when /(e|f)/i
-      Kernel.print o.red
-    else
-      Kernel.print o.green
-    end
-  end
-  def puts o = ''
-    if o=~ /([1-9]+ failures)/
-      o.sub!(/([1-9]+ failures)/, '\1'.red)
-    end
-    Kernel.puts o
-  end
-end
-MiniTest::Unit.output = Pride.new
+require './test/helper'
 
 class ClassicMappingTest < MiniTest::Unit::TestCase
   include Rack::Test::Methods
@@ -95,35 +76,5 @@ class ClassicMappingTest < MiniTest::Unit::TestCase
     get '/take/123'
     assert_equal 200, last_response.status
     assert_equal true, (last_response.body =~ /123/) != nil
-  end
-end
-
-require 'minitest/spec'
-describe  "without defined route block" do
-  include Rack::Test::Methods
-  def app
-    @app = Sinatra::Application
-    @app.set :environment, :test
-    @app
-  end
-  it "should respond to get" do
-    get '/welcome/index'
-    last_response.status.must_equal 200
-    last_response.body.must_match /route test/
-  end
-  it "should respond to put" do
-    put '/welcome/update'
-    last_response.status.must_equal 200
-    last_response.body.must_match /walternet/
-  end
-  it "should respond to post" do
-    post '/welcome/peter'
-    last_response.status.must_equal 200
-    last_response.body.must_match /amber/
-  end
-  it "should respond to delete" do
-    delete '/welcome/universe'
-    last_response.status.must_equal 200
-    last_response.body.must_match /destroy/
   end
 end
