@@ -63,6 +63,27 @@ class Welcome < Sinatra::Controller
   end
 end
 
+class Show70 < Sinatra::Controller
+  def get_kelso
+    'michael'
+  end
+end
+
+class Seinfeld < Sinatra::Controller
+  def get_cosmo
+    'kramer'
+  end
+  def george
+    'bald'
+  end
+end
+
+Sinatra::Controllers.register(Show70, :scope => '/70s_show')
+# make sure we don't need leading slash
+Sinatra::Controllers.register(Seinfeld, :scope => 'seinfeld') do
+  get 'costanza', :george
+end
+
 Sinatra::Controllers.register(Welcome)
 
 Sinatra::Controllers.register(Help) do
@@ -80,7 +101,9 @@ Sinatra::Controllers.register(Blah) do
   get '/take/:arg', :take
 end
 
-# regular paths should work too
+
+
+# regular path should work too
 get '/regular' do
   'flames'
 end

@@ -25,16 +25,22 @@ module Sinatra
         @opts  = opts
       end
 
-      def route(verb, path, action, opts={})
+      def route(verb, path, action)
         aklass = klass # need this so it will stay in scope for closure
         block = proc { aklass.new(params, request).send action }
+        if path[0] != '/'
+          path = '/' + File.join(opts[:scope], path)
+        end
         Sinatra::Application.send verb, path, &block
       end
 
       def parse
         klass.instance_methods.each do |meth|
-          next unless meth =~ /^(get|post|delete|put)_(.*)$/
-          route $1,"/#{klass.to_s.downcase}/#{$2.downcase}", meth
+          verb,name = meth.to_s.scan(/^(get|post|delete|put)_(.*)$/).flatten
+          next unless verb
+          scope = '/' + (opts[:scope] || klass.to_s.downcase)
+          scope.gsub!(%r{^/+},'/')
+          route verb,"#{scope}/#{name.downcase}", meth
         end
       end
 
