@@ -1,5 +1,27 @@
 require './test/helper'
 require 'minitest/spec'
+
+class Show70 < Sinatra::Controller
+  def get_kelso
+    'michael'
+  end
+end
+
+class Seinfeld < Sinatra::Controller
+  def get_cosmo
+    'kramer'
+  end
+  def george
+    'bald'
+  end
+end
+
+Sinatra::Controllers.register(Show70, :scope => '/70s_show')
+# make sure we don't need leading slash
+Sinatra::Controllers.register(Seinfeld, :scope => 'seinfeld') do
+  get 'costanza', :george
+end
+
 describe  "with defined scope" do
   include Rack::Test::Methods
   def app
