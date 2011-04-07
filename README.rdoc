@@ -1,4 +1,4 @@
-= Sinatra-controller
+= Sinatra-controllers
 
 Sinatra routing done differently.  Allows for clean organization across
 multiple sinatra routes files.
