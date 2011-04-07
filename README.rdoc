@@ -57,4 +57,28 @@ register is optional here.
     end
   end
 
+You can also use scopes for your own defined path, either because you're
+unhappy with your classname, or because you just want to:
 
+  class Fringe < Sinatra::Controller
+    def get_walternet
+      'scopes'
+    end
+    def peter
+      'more scopes'
+    end
+    def index
+      'index still if you want'
+    end
+  end
+
+  Sinatra::Controllers.register(Fringe, :scope => 'fringe') do
+    get 'peter', :peter
+    get '/', :index
+  end
+
+this enables the following routes
+
+  get '/fringe/walternet'
+  get '/fringe/peter'
+  get '/'

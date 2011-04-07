@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sinatra-controllers (0.1.2)
+    sinatra-controllers (0.2.0)
       sinatra (>= 1.0.0)
 
 GEM
