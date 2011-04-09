@@ -29,7 +29,7 @@ module Sinatra
         aklass = klass # need this so it will stay in scope for closure
         block = proc { aklass.new(params, request).send action }
         if path[0] != '/'
-          path = '/' + File.join(opts[:scope], path)
+          path = '/' + File.join(opts[:scope] || '', path)
         end
         Sinatra::Application.send verb, path, &block
       end

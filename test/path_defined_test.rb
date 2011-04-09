@@ -16,6 +16,12 @@ class Seinfeld < Sinatra::Controller
   end
 end
 
+class Leader < Sinatra::Controller
+  def omit
+    'slash'
+  end
+end
+
 Sinatra::Controllers.register(Show70, :scope => '/70s_show')
 # make sure we don't need leading slash
 Sinatra::Controllers.register(Seinfeld, :scope => 'seinfeld') do
@@ -29,6 +35,13 @@ describe  "with defined scope" do
     @app.set :environment, :test
     @app
   end
+
+  it "should not bail on empty scope without preceding slash" do
+    Sinatra::Controllers.register(Leader) do
+      get 'foo', :omit
+    end
+  end
+
   it "should use correct scope" do
     get '/70s_show/kelso'
     last_response.status.must_equal 200
