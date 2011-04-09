@@ -18,11 +18,15 @@ module Sinatra
   end
   module Controllers
     class Mapping
+      @@routes = []
       attr_accessor :klass, :opts
-
       def initialize(klass,opts={})
         @klass = klass
         @opts  = opts
+      end
+
+      def self.routes
+        @@routes
       end
 
       def route(verb, path, action)
@@ -31,7 +35,9 @@ module Sinatra
         if path[0] != '/'
           path = '/' + File.join(opts[:scope] || '', path)
         end
-        Sinatra::Application.send verb, path, &block
+        @@routes.push [verb.to_sym, path, "#{aklass}\##{action}"]
+        path.gsub!(%r{^/+},'/')
+        Sinatra::Base.send verb, path, &block
       end
 
       def parse
@@ -61,6 +67,16 @@ module Sinatra
         map = Mapping.new(klass,opts)
         map.instance_eval(&block) if block
         map.parse
+      end
+      def routes
+        Sinatra::Controllers::Mapping.routes
+      end
+      def show_routes
+        routes.each do |verb, path, action|
+          puts
+          puts "#{verb.to_s.ljust(8)}#{path.ljust(35)}#{action.ljust(25)}"
+          puts
+        end
       end
     end
   end

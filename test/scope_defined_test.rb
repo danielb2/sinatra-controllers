@@ -22,6 +22,13 @@ class Leader < Sinatra::Controller
   end
 end
 
+class Sliders < Sinatra::Controller
+  def get_quinn
+    'mallory'
+  end
+end
+Sinatra::Controllers.register(Sliders, :scope => '/')
+
 Sinatra::Controllers.register(Show70, :scope => '/70s_show')
 # make sure we don't need leading slash
 Sinatra::Controllers.register(Seinfeld, :scope => 'seinfeld') do
@@ -40,6 +47,12 @@ describe  "with defined scope" do
     Sinatra::Controllers.register(Leader) do
       get 'foo', :omit
     end
+  end
+
+  it "should get a scope of slash correctly for a class" do
+    get '/quinn'
+    last_response.status.must_equal 200
+    last_response.body.must_equal 'mallory'
   end
 
   it "should use correct scope" do

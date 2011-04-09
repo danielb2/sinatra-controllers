@@ -1,1 +1,7 @@
+
+* 0.3.0
+	- fix bug with class with scope '/'
+* 0.2.1
+	- fix bug where omittance of leading slash and no defined scope leads to
+	TypeError
 * 0.2.0 add scoping
