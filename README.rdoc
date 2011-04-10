@@ -3,7 +3,8 @@
 Sinatra routing done differently.  Allows for clean organization across
 multiple sinatra routes files.
 
-NOTE: this has only been tested with ruby 1.9.2
+* this has only been tested with ruby 1.9.2
+* redirect doesn't work.. yet
 
 
 == Examples

@@ -1,6 +1,8 @@
 
-* 0.3.0
-	- fix bug with class with scope '/'
+* 0.2.2
+	- fix bug with class with scope '/'.
+	- adding of Sinatra::Controllers.routes and Sinatra::Controllers.show_routes.
+	- adding example application.
 * 0.2.1
 	- fix bug where omittance of leading slash and no defined scope leads to
 	TypeError
